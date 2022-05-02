@@ -11,15 +11,23 @@ public class Solution {
             hm.put(a[i], i);
         }
         System.out.println(hm);
+        
         hm.remove(0);
         hm.forEach((key, value) -> System.out.println(key + " : " + value));
+        
         boolean result = hm.containsKey(88);
         System.out.println(result);
+        
+        boolean ans = hm.containsValue(8);
+        System.out.println(ans);
         
         //Using An Iterator on Keys
         Iterator it = hm.keySet().iterator();
         while(it.hasNext()){
             System.out.println(it.next());
         }
+        
+        hm.clear();
+        System.out.println(hm.size());
     }
 }
