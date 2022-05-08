@@ -1,0 +1,707 @@
+// // Closures -- Function along with its lexical Environment
+
+// function a() {
+//         var x = 5
+//         
+//         
+//        
+//         function b() {
+//             console.log(x)
+//         }
+//         x=50
+//         return b;
+//     }
+    
+//     var p = a()
+    
+//     console.log(p)
+    
+//     p()
+
+//     // even though the function is returned, it will return the function along with this lexical scope(closure variables). In this case
+// // the function is returned along with the variable 'x=50', which is a closure or lexical scope/environment.
+// function outer(a) {
+//         var a = 10
+//         function inner() {
+//             console.log(a)
+//         }
+//         return inner
+//     }
+    
+//     outer(5)()
+    
+//     //in this scenario the inner function will access to var a = 10, as it is found from closure, hence it ll print 10, if we remove
+//     // var a = 10 then it ll print 5
+    
+    // function out(p) {
+    //     p = 10
+    //     function inn() {
+    
+    //         var p = 20
+    //         console.log(p)
+    //     }
+    //     return inn
+    // }
+    
+    // out(5)()
+    
+//     //here it prints 20 as it is found first!
+    
+    
+//     // Functional Programming:
+//     // to calulate radius, circumference and diameter of a circle
+    
+//     //traditional way :( :(
+    
+//     const radius = [4,6,8,10]
+    
+//     const calculateArea = (radius) => {
+//         let area=[]
+//         for(let i=0; i< radius.length; i++){
+//             area.push( Math.PI * radius[i] * radius[i])
+//         }
+    
+//         return area
+//     }
+    
+//     const calculateCircumference = (radius) => {
+//         let area=[]
+//         for(let i=0; i< radius.length; i++){
+//             area.push(2* Math.PI * radius[i])
+//         }
+    
+//         return area
+//     }
+    
+//     const calculateDiameter = (radius) => {
+//         let area=[]
+//         for(let i=0; i< radius.length; i++){
+//             area.push(2* radius[i])
+//         }
+    
+//         return area
+//     }
+//     console.log(calculateArea(radius))
+    
+//     console.log(calculateCircumference(radius))
+    
+//     console.log(calculateDiameter(radius))
+    
+//     // Doing it in functional programming way, we should never ever do DRY => which is do not repeat yourself :P
+    
+//     const radius1 = [4,6,8,10]
+    
+//     const Calarea= (radius) => {
+//         return(Math.PI*radius*radius)
+//     }
+    
+//     const calCercum = radius => 2*Math.PI*radius
+    
+//     const calDia = radius => 2*radius
+    
+//     const calculateArea1 = (radius, area) => {
+//         let area1=[]
+//         for(let i=0; i< radius.length; i++){
+//             area1.push(area(radius[i]))
+//         }
+    
+//         return area1
+//     }
+    
+//     console.log(calculateArea1(radius1, Calarea))
+    
+//     console.log(calculateArea1(radius1, calCercum))
+    
+//     console.log(calculateArea1(radius1, calDia))
+    
+//     //further optimization :P
+    
+//     console.log(radius.map(Calarea))
+    
+    
+//     // Function Currying:
+//     // function currying can be done in two ways one is with bind method and other is with closures
+    
+//     const multiply = (a,b) => a*b
+    
+//     const multiplyByTwo = multiply.bind(this,2)
+    
+//     console.log(multiplyByTwo(6))
+    
+//     //By closure
+    
+//     const multiplyClosure = (a) => {
+//         return function(b){
+//             console.log(a*b)
+//         }
+//     }
+    
+//     const multiplyByTwoClosure = multiplyClosure(2)
+    
+//     multiplyByTwoClosure(6)
+    
+//     // Prototype Inheritence:
+//     // Prototype and its inheritance
+    
+    // let object = {
+    //     name1: 'Naresh',
+    //     city: 'bangalore',
+    //     print: function() {
+    //         console.log('Name', this.name1, 'city', this.city)
+    //     }
+    // }
+    
+    // let object2 = {
+    //     name1: 'MM'
+    // }
+    
+    // //the below line of code should be never ever done
+    // object2.__proto__ = object 
+    
+    // // Object.prototype.obj = object
+    
+    // // object2.prototype = object
+    
+    // console.log(object2.__proto__)
+    
+    // console.log(object2)
+    
+    // console.log(object2.print())
+    
+//     //************************
+//     //Constructor function
+//     //************************
+    
+//     var CreateEmployee = function(firstName, lastName, gender, city) {
+//         //var this = {}
+//         this.firstName = firstName
+//         this.lastName = lastName
+//         this.gender = gender
+//         this.city = city
+//        // return this
+//     }
+    
+//     //here in the constructor function 'this' keyword will refer to the instance from where it is called ie 'emp1'
+//     var emp1 = new CreateEmployee('Naresh', 'Kumar', 'Male', 'Bangalore')
+//     //**************************************************************************************************************
+//     //**************************************************************************************************************
+    
+//     //This Key word and different ways of calling a function
+    
+//     //1st method here this refers to global object window
+//     var foo = function() {
+//         console.log('Hello', this)
+//     }
+    
+//     foo()
+    
+//     //2nd Method here this refers to the obj property
+//     var obj = {prop: 'jus a property'}
+    
+//     obj.foo = function() {
+//         console.log('Hello', this)
+//     }
+    
+//     obj.foo()
+    
+//     //3rd constructor method this refers to an empth object
+    
+//     var Foo = function() {
+//         console.log('Hello', this)
+//     }
+    
+//     new Foo()
+    
+//     //4th bind,call and apply method this refers to the first argument of the bind method
+    
+//     var Employee = function (name, age, city ) {
+//         this.name = name
+//         this.age= age
+//         this.city=city
+//     }
+    
+//     const increaseAge = function () {
+//         console.log('called')
+//         this.age += 5
+//     }
+//     var Emp1 = new Employee('Naresh', 28, 'Bangalore')
+    
+//     increaseAge.call(Emp1)
+    
+//     console.log(Emp1, 'Emp1')
+    
+//     //************************************************************************
+//     //************************************************************************
+//     //******MULTI LEVEL INHERITENCE*******
+    
+//     const Employe = function(name) {
+//         this.name = name
+//     }
+    
+//     Employe.prototype.getName = function() {
+//         console.log(this.name)
+//     }
+    
+//     const Manager = function(name, dept) {
+//         this.name = name
+//         this.dept=dept
+//     }
+    
+//     Manager.prototype.getDept = function() {
+//         console.log(this.dept)
+//     }
+    
+//     let Emp10 = new Employe('Naresh')
+    
+//     Emp10.getName()
+    
+//     let mgr10 = new Manager('Bharathi', 'MW')
+    
+//     mgr10.__proto__.__proto__ = Employe.prototype
+    
+//     mgr10.getName()
+//     mgr10.getDept()
+    
+    
+//     // scope:
+//     //execution context, memory and code, scope chain-- key words
+    
+//     function a() {
+//        
+//         c()
+//     function c() {
+//         var b=10
+//         console.log(b)
+//     }
+//         
+//     }
+    
+//     a()
+    
+//     setTimeOut:
+//     //set timeout with closures
+    
+//     //i is declared as var: while the setTimeout is executed the referance to i will be 6(6 times print)
+//     function setVar () {
+//         for(var i=0; i<=5; i++){        
+//             setTimeout(() => {
+//                 console.log(i)  
+//             }, 2000);
+//         }
+    
+//         console.log('testVar')
+//     }
+    
+//     setVar()
+    
+//     //i is decated as let: setTimeout will have reference to the i value during each and every instance(0-5 will be printed)
+//     function setLet () {
+//         for(let i=0; i<=5; i++){        
+//             setTimeout(() => {
+//                 console.log(i)  
+//             }, 2000);
+//         }
+    
+//         console.log('testLet')
+//     }
+    
+//     setLet()
+    
+//     //to print 0-5 using setTimeOut with out using let
+    
+    // function custPrint () {
+    //    { 
+    //       for(var i=0; i<=5; i++){        
+    //         var printValues =  function(value) {  setTimeout(() => {
+    //             console.log(value)  
+    //         }, 2000);}
+    //         printValues(i)
+    //     }    
+    // }
+    //     console.log('testCust')
+    
+    // }
+    
+//     custPrint()
+    
+//     // coding Questions:
+//remove duplicates from an array
+// function uni(a){
+//     let obj={}
+//     return a.filter((itm) => {
+//         return obj.hasOwnProperty(itm) ? false : (obj[itm] = true)
+//     })
+// }
+    
+//     //****************************************************
+     
+//     Let a = [1,[1,2,[1,2,3]]] ==> [1,2,3,4,2,3]
+    
+//     function flatten(items) {
+//       const flat = [];
+    
+//       items.forEach(item => {
+//         if (Array.isArray(item)) {
+//           flat.push(...flatten(item));
+//         } else {
+//           flat.push(item);
+//         }
+//       });
+    
+//       return flat;
+//     }
+
+// function flatten(arr) {
+//     return arr.reduce((acc, ini) => {
+//         return acc.concat(Array.isArray(ini) ? flatten(ini)  : ini )
+//     }, [])
+// }
+    
+//               
+//               
+//                //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&77
+    //[a,b,c,d,b,c,a,a,] ==> [a,d]
+//                const findOdd = (arr) => {
+//                 const obj = {}
+//                 for(let i=0; i<arr.length; i++){
+//                     let value = arr[i]
+//                     if(obj[value]){
+//                         obj[value] = obj[value] + 1
+//                     }
+//                     else obj[value] = 1
+//                 }
+    
+//                 console.log(obj)
+//                 let result = []
+//                 for(item in obj){
+//                     if((obj[item]%2) !== 0){
+//                         result.push(item)
+//                     }
+//                 }
+    
+//                 console.log(result)
+//             }
+    
+//             //***************************************************** */
+    
+//             const sumOfPrime = (num) => {
+//                 let i = 1
+//                 let sum = 0
+    
+//                 while(i <= num){
+//                     if(isPrime(i)){
+//                         sum = sum + i
+//                     }
+//                     i++
+//                 }
+//                 console.log(sum)
+//             }
+    
+//             function isPrime(item) {
+//                 for(let i=2; i<item; i++){
+//                     if(item % i === 0) return false
+//                 }
+//                 return item !== 0 && item !== 1
+//             }
+    
+//             //****************************************************** */
+// in ==> "welcome to this world"
+// out ==> "emoclew ot siht dlrow"
+//             const reverseString = (input) => {
+//                 let word = ''
+//                 let result = ''
+//                 for(let i = input.length - 1; i>=0 ; i--){
+//                     if(input[i] === " "){
+//                         result = " " + word + result
+//                         word = ""
+//                     } else {
+//                         word = word + input[i]
+//                     }
+//                 }
+//                 console.log(word + result)
+//             }
+    
+//             //*************************************************************** */
+    //         let string = "Hello"
+    //         let word = "wrld Helloh fkhksdf"
+    //         const index = word.indexOf(string)
+    //         let endIndex
+    //         if(index !== -1){
+    //             endIndex = index + string.length - 1
+    //         }
+    
+    //         console.log(index, endIndex)
+    
+//             //****************************************************************** */
+    
+//             class Queue {
+//                 constructor() {
+//                     this.list = []
+//                 }
+    
+//                 enqueue(item){
+//                     this.list.push(item)
+//                     console.log(this.list)
+    
+//                 }
+    
+//                 dequeue(){
+//                     console.log(this.list.shift())
+//                 //    return this.list.shift()
+//                 }
+//             }
+    
+//             var myQueue = new Queue()
+//             myQueue.enqueue(5)
+//             myQueue.enqueue(15)
+//             myQueue.enqueue(25)
+    
+//             myQueue.dequeue
+//             
+//     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+    
+    //         [1,2,3,4,4,4,5,6,5,5] == get the second highest
+    
+    //         function getHighest(arr) {
+    //             let count = {}
+    //             let max = {}
+    //             let value
+    //             for(let i=0; i< arr.length; i++){
+    //                 let value = arr[i]
+    //                 if(count[value]){
+    //                     count[value] = count[value] + 1
+    //                 }else count[value] = 1
+    //             }
+    //             console.log(count)
+    //             let tempResult = []
+    //             for(item in count) {
+    //                 if(count[item] > max){
+    //                 max = count[item]
+    //                 value = item
+    // }
+    //             }
+    //             console.log(value)
+    //             return value
+    //                 
+    //         }
+    
+//     // Mybind:
+//     //to create a bind pollyfill
+    
+//     let name = {
+//         firstName: 'Naresh',
+//         lastName: 'Kumar'
+//     }
+    
+//     let printName = function(city, state){
+//         console.log(this.firstName,' ', this.lastName, city, state)
+//     }
+    
+//     let printMyName = printName.bind(name, 'Bangalore')
+//     printMyName('Karnataka')
+    
+//     Function.prototype.myBind = function(...args) {
+//         // console.log(args, 'args')
+//         const obj = this
+//         const city = args.slice(1)
+//         return function(...funcArgs){
+//             // console.log(funcArgs, 'funcArgs')
+//             //here we need call or apply to have the scope of the parent argument thats name,city,state
+//             // obj.call(args[0])
+//             obj.apply(args[0], [...city, ...funcArgs])
+//         }
+//     }
+
+//myBind
+// Function.prototype.myBind = function(scope, ...args) {
+//     scope._this = this
+//     return function (...args) {
+//         scope._this(...args)
+//     }
+// }
+
+//myCall
+// Function.prototype.myCall = function(scope, ...args){
+//     scope._this = this
+//     return scope._this(...args)
+// }
+
+//myApply
+// Function.prototype.myApply = function(scope, args){
+//     scope._this =this
+//     return scope._this(...args)
+// }
+    
+//     let printMyBindName = printName.myBind(name, 'Bangalore')
+//     printMyBindName('Karnataka')
+    
+//     //https://www.youtube.com/watch?v=ke_y6z0xRpk
+    
+//to make array into chunks or subarray
+//ex: chunk([1,2,3,4],2) ===>> [[1,2],[3,4]]
+
+// const chunks = (arr, chunkValue)=>{
+//     let result = []
+//     for(let i=0; i<=arr.length; i = i+chunkValue){
+//         result.push(arr.slice(i, i+ chunkValue))
+//     }
+//     console.log(result)
+// }
+
+
+//to add * to the given string if it is oval
+// const star = (arr) => {
+//     let result = []
+//     let obj = {
+//         a: true,
+//         e: true,
+//         i: true,
+//         o: true,
+//         u: true
+//     }
+//     let count = 0
+//     let string = (value) => {
+//         console.log(value, 'value')
+//         let res = []
+//         for(let j=0; j< value; j++){
+//             res = res + "*"
+//         }
+//         return res
+//     }
+//     for(let i=0; i<arr.length; i++){
+//         let value = arr[i]
+//         if(obj[value]){
+//             count = count + 1
+//             let item = string(count)
+//             result.push(item)
+//         }else result.push(arr[i])
+//     }
+//     console.log(result, 'result')
+// }
+
+//to find the maximum sum of a sub array given in an array
+//[1,2,-4,5,6]
+// let sub = (arr) => {
+//     let result = arr[0]
+//     for(let i=1; i < arr.length; i++){
+//         arr[i] = Math.max(arr[i], arr[i] + arr[i-1])
+//         result = Math.max(result, arr[i])
+//     }
+//     console.log(result)
+// }
+
+//Input: l1 = [2,4,3], l2 = [5,6,4]
+// Output: [7,0,8]
+// Explanation: 342 + 465 = 807.
+//var addTwoNumbers = function(l1, l2) {
+//     let first = l1.reduce((acc,item)=>{ return acc + item},'')
+//     console.log(first)
+//     let second = l2.reduce((acc,item)=>{return acc + item},'')
+//     let sum = parseInt(first) + parseInt(second)
+//     console.log(sum)
+//     let stringSum = ''+sum
+//     console.log(stringSum)
+//     let result = []
+//     for(let i=(stringSum.length - 1); i>=0; i--){
+//         result.push(stringSum[i])
+//     }
+// console.log(result)
+                
+// };
+
+//deleteDuplicates from sorted array
+// var deleteDuplicates = function(head) {
+//     let result = []
+//     for(let i = 0; i< head.length; i++){
+//         if(!(head[i] === head[i-1])){
+//             result.push(head[i])
+//         }
+//     }
+// return result
+    
+// };
+
+//return longest prefix
+// Input: strs = ["flower","flow","flight"]
+// Output: "fl"
+// var longestCommonPrefix = function(strs) {
+//     let prefix = strs[0]
+//     for(let i=1; i< strs.length; i++){
+//         while(strs[i].indexOf(prefix) !== 0){
+//             prefix = prefix.substring(0, prefix.length-1)
+//         }
+//     }
+//     return prefix
+// };
+
+//A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+// Example 1:
+//https://leetcode.com/problems/maximum-depth-of-binary-tree/
+// Input: root = [3,9,20,null,null,15,7]
+// Output: 3
+// var maxDepth = function(root) {
+//     if(!root) return 0
+//     return 1+Math.max(maxDepth(root.left), maxDepth(root.right))
+// };
+
+//two sum to return the index of sum
+//[1,2,3,4,5],9
+// var twoSum = function(nums, target) {
+//     const indices = {};
+
+//     nums.forEach((item, index) => {
+//         indices[item] = index
+//     });
+
+//     for (let index = 0; index < nums.length; index++) {
+//         const complement = target - nums[index];
+
+//         if (indices[complement] !== undefined && indices[complement] !== index) {
+//             return [index, indices[complement]]
+//         }
+//     }
+// };
+
+//map Polyfill
+// Array.prototype.myMap = function(callBack, args) {
+//     let index = 0
+//     let max = this.length
+//     let result = []
+
+//     while(index < max){
+//         result[index] = callBack.call(args, this[index], index, this)
+// index +=1
+//     }
+
+//     return result
+// }
+
+//filter Polyfill
+// Array.prototype.myFilter = function(callBack, thisArg){
+    // let index = 0
+//     let max = this.length
+//     let result = [] 
+//     while(index < max){
+//         if(callBack.call(args, this[index], index, this)){
+    // result.push(this[index])
+    // index +=1
+// }
+//     }
+
+//     return result
+
+// }
+
+//reduce Polyfill
+
+// Array.prototype.myReduce = function(callBack, acc, thisarg){
+// let con = acc
+// let index = 0
+// //     let max = this.length
+// //     let result = [] 
+// while(index < max) {
+//     con = callBack.call(thisArg, con, this[index], index, this)
+//     // index +=1
+// }
+// return con
+// }
