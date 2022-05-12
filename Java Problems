@@ -29,5 +29,110 @@ public class Solution {
 }
 
 /***************************************************************************************************/
-/* Given an array of integers, find two numbers such that they add up to a specific target number.
+/* Given an array of integers, Remove a given number.
 ****************************************************************************************************/
+public class Solution {
+    public static void main(String[] args) {
+        int a[] = {3, 4, -7, 3, 1, 3, 1, -4, -2, -2 }; 
+        int rem = 3, j = 0;
+        for(int x : a)
+            if(x!= rem)
+                a[j++]=x;
+        for(int x : a)
+        System.out.println(x);
+    }
+}
+
+/***************************************************************************************************/
+/* Reverse a given number.
+****************************************************************************************************/
+public class Solution {
+    public static void main(String[] args) {
+        int a = 849, rev = 0;
+        while(a>0){
+            rev = (rev*10) + (a%10);
+            a = a/10;
+        }
+        System.out.println(rev);
+    }
+}
+
+/***************************************************************************************************/
+/* Change given String to number.
+****************************************************************************************************/
+public int atoi(String str) {
+	if (str == null || str.length() < 1)
+		return 0;
+ 
+	// trim white spaces
+	str = str.trim();
+ 
+	char flag = '+';
+ 
+	// check negative or positive
+	int i = 0;
+	if (str.charAt(0) == '-') {
+		flag = '-';
+		i++;
+	} else if (str.charAt(0) == '+') {
+		i++;
+	}
+	// use double to store result
+	double result = 0;
+ 
+	// calculate value
+	while (str.length() > i && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+		result = result * 10 + (str.charAt(i) - '0');
+		i++;
+	}
+ 
+	if (flag == '-')
+		result = -result;
+ 
+	// handle max and min
+	if (result > Integer.MAX_VALUE)
+		return Integer.MAX_VALUE;
+ 
+	if (result < Integer.MIN_VALUE)
+		return Integer.MIN_VALUE;
+ 
+	return (int) result;
+}
+
+/***************************************************************************************************/
+/* Given an array of integers, every element appears twice except for one. Find that single one.
+****************************************************************************************************/
+public class Solution {
+    public static void main(String[] args) {
+        int a []= {2,5,3,6,2,6,3};
+        int x=0;
+        for(int y : a){
+            x = x^y;
+        }
+        System.out.println(x);
+    }
+}
+
+/***************************************************************************************************/
+/* Merge two sorted arrays given m and n 
+****************************************************************************************************/
+public class Solution {
+    public static void main(String[] args) {
+        int nums1[] = {1,2,3,0,0,0};
+        int nums2[] = {2,5,6};
+        int m = 3;
+        int n = 3;
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+        
+            while (k >= 0) {
+            if (j < 0 || (i >= 0 && nums1[i] > nums2[j]))
+                nums1[k--] = nums1[i--];
+            else
+                nums1[k--] = nums2[j--];
+        }
+        for( int x : nums1)
+            System.out.println(x);
+    }
+}
