@@ -1,0 +1,62 @@
+import java.util.*;
+
+class Node{
+    int val;
+    Node left, right;
+    
+    Node(int key){
+        val = key;
+        left = right = null;
+    }
+}
+
+public class Solution {
+    Node root;
+     
+    public void flatten(Node n){
+        if(n == null) return;
+        if(n.left == null && n.right == null) return;
+        
+        if(n.left != null){
+            flatten(n.left);
+            
+            Node temp = n.right;
+            n.right = n.left;
+            n.left = null;
+            
+            Node curr = n.right;
+            while(curr.right != null)
+                curr = curr.right;
+            curr.right = temp;            
+        }
+        flatten(n.right);
+    }
+    public void inOrder(Node n){
+        if(n == null) return;
+        
+        inOrder(n.left);
+        System.out.println(" " + n.val);
+        inOrder(n.right);
+    }
+    public static void main(String[] args) {
+        Solution tree = new Solution();
+ 
+        /*    1
+            /   \
+           2     5
+          / \     \
+         3   4     6 */
+ 
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(5);
+        tree.root.left.left = new Node(3);
+        tree.root.left.right = new Node(4);
+        tree.root.right.right = new Node(6);
+ 
+        System.out.println(
+            "The Inorder traversal after flattening binary tree ");
+        tree.flatten(tree.root);
+        tree.inOrder(tree.root);
+    }
+}
