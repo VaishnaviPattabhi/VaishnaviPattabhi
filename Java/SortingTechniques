@@ -1,0 +1,56 @@
+// Merge Sort
+// Time complexity- O(n*log n)
+// Space Complexity - O(n)
+MERGE_SORT(arr, beg, end)  
+  
+if beg < end  
+set mid = (beg + end)/2  
+MERGE_SORT(arr, beg, mid)  
+MERGE_SORT(arr, mid + 1, end)  
+MERGE (arr, beg, mid, end)  
+end of if  
+  
+END MERGE_SORT
+
+
+
+// Selection Sort-search for the lowest element and move it to the right location
+// Time complexity- O(n*n)
+// Space Complexity - O(1)
+
+public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;//searching for lowest index  
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+  
+// Bubble sort-array is traversed from first element to last element. 
+// Here, current element is compared with the next element. 
+// If current element is greater than the next element, it is swapped.
+// Time complexity- O(n*n)
+// Space Complexity - O(1)
+
+  static void bubbleSort(int[] arr) {  
+        int n = arr.length;  
+        int temp = 0;  
+         for(int i=0; i < n; i++){  
+                 for(int j=1; j < (n-i); j++){  
+                          if(arr[j-1] > arr[j]){  
+                                 //swap elements  
+                                 temp = arr[j-1];  
+                                 arr[j-1] = arr[j];  
+                                 arr[j] = temp;  
+                         }  
+                          
+                 }  
+         }
+  

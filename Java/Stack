@@ -1,0 +1,58 @@
+public class Stack {
+    static int MAX=5;
+    int a[]=new int[MAX];
+    int TOP;
+    Stack (){
+        TOP=-1;
+    }
+    boolean isEmpty(){
+        return (TOP<0);
+    }
+    
+    boolean push(int x){
+        if(TOP >= (MAX-1)){
+            System.out.println("STACK OVERFLOW");
+            return false;
+        }else{
+            a[++TOP]=x;
+            return true;
+        }
+    }
+    
+    int pop(){
+        int x;
+        if(TOP<0){
+            System.out.println("STACK UNDERFLOW");
+            return 0;
+        }else{
+            x=a[TOP--];
+            return x;
+        }
+    }
+    int peek(){
+        int x;
+        if(TOP<0){
+            System.out.println("STACK UNDERFLOW");
+            return 0;
+        }else{
+            x=a[TOP];
+            return x;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Stack s = new Stack();
+        System.out.println("Stack top is : " + s.TOP);
+        System.out.println("Is the stack empty ? " + s.isEmpty());
+        s.push(22222);
+        s.push(2222);
+        s.push(222);
+        s.push(22);
+        s.push(2);
+        System.out.println("Stack top is : " + s.TOP);
+        System.out.println("Popping from top : " + s.pop());
+        System.out.println("Popping from top : " + s.pop());
+        System.out.println("peeking : " + s.peek());
+    }
+}

@@ -1,0 +1,78 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+class Result {
+
+    /*
+     * Complete the 'getMax' function below.
+     *
+     * The function is expected to return an INTEGER_ARRAY.
+     * The function accepts STRING_ARRAY operations as parameter.
+     */
+
+    public static List<Integer> getMax(List<String> operations) {
+    // Write your code here
+    List<Integer> lis = new ArrayList<>();
+    Stack<Integer> s = new Stack<>();
+    Stack<Integer> max = new Stack<>();
+    
+    for (String op : operations) {
+         String[] cmd = op.split(" ");
+         switch(Integer.parseInt(cmd[0])){
+             case 1:{
+                 int element = Integer.parseInt(cmd[1]);
+                 s.push(element);
+                 if( max.isEmpty() || max.peek() <= element)
+                    max.push(element);
+                 break;
+             }
+             case 2:{
+                 int popElement = s.pop();
+                 if(max.peek() == popElement)
+                    max.pop();
+                 break;
+             }
+             case 3:{
+                 System.out.println(max.peek());
+                 lis.add(max.peek());
+                 break;
+             }
+         }
+    }   
+    return lis;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<String> ops = IntStream.range(0, n).mapToObj(i -> {
+            try {
+                return bufferedReader.readLine();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        })
+            .collect(toList());
+
+        List<Integer> res = Result.getMax(ops);
+
+        bufferedWriter.write(
+            res.stream()
+                .map(Object::toString)
+                .collect(joining("\n"))
+            + "\n"
+        );
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
